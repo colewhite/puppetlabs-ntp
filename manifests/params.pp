@@ -7,6 +7,7 @@ class ntp::params {
   $keys_controlkey   = ''
   $keys_requestkey   = ''
   $keys_trusted      = []
+  $orphan_stratum    = undef
   $logfile           = undef
   $package_ensure    = 'present'
   $peers             = []
@@ -19,6 +20,10 @@ class ntp::params {
   $interfaces        = []
   $disable_auth      = false
   $broadcastclient   = false
+
+  # Parameterize Statistics
+  $statistics        = {}
+  $statsdir          = '/var/log/ntpstats/'
 
   # Allow a list of fudge options
   $fudge             = []

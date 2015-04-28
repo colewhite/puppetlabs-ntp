@@ -13,6 +13,14 @@ disable monitor
 disable auth
 <% end -%>
 
+<% if ! @statistics.empty? -%>
+statistics<% @statistics.keys.each do |name| %> <%= name %><% end %>
+<% @statistics.each do |name, opts| -%>
+filegen <%= name %> file <%= opts.fetch('filename', name) %> type <%= opts.fetch('type', 'none') %> <%= opts.fetch('link', 'link') %> <%= opts.fetch('enable', 'enable') %>
+<% end -%>
+statsdir <%= @statsdir %>
+<% end -%>
+
 <% if @restrict != [] -%>
 # Permit time synchronization with our time source, but do not
 # permit the source to query or modify the service on this system.
@@ -76,4 +84,8 @@ controlkey <%= @keys_controlkey %>
 <% end -%>
 <% [@fudge].flatten.each do |entry| -%>
 fudge <%= entry %>
+<% end -%>
+
+<% if @orphan_stratum -%>
+tos orphan <%= @orphan_stratum %>
 <% end -%>

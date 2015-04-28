@@ -102,6 +102,28 @@ class { '::ntp':
 }
 ```
 
+###I'd like to enable statistics.
+```puppet
+class { '::ntp':
+  statistics => {
+    'loopstats' => {
+      'filename' => 'loopstats',
+      'type'     => 'day',
+      'link'     => 'link',
+      'enable'   => 'enable'
+    }
+  }
+  statsdir => '/var/log/ntpstats/'
+}
+```
+
+##I'd like to enable orphan mode when stratum falls above 5.
+```puppet
+class { '::ntp':
+  orphan_stratum => '5'
+}
+```
+
 ###Looks great!  But I'd like a different template; we need to do something unique here.
 
 ```puppet

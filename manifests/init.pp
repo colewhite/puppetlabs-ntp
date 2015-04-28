@@ -14,6 +14,7 @@ class ntp (
   $keys_controlkey   = $ntp::params::keys_controlkey,
   $keys_requestkey   = $ntp::params::keys_requestkey,
   $keys_trusted      = $ntp::params::keys_trusted,
+  $orphan_stratum    = $ntp::params::orphan_stratum,
   $package_ensure    = $ntp::params::package_ensure,
   $package_manage    = $ntp::params::package_manage,
   $package_name      = $ntp::params::package_name,
@@ -27,6 +28,8 @@ class ntp (
   $service_ensure    = $ntp::params::service_ensure,
   $service_manage    = $ntp::params::service_manage,
   $service_name      = $ntp::params::service_name,
+  $statistics        = $ntp::params::statistics,
+  $statsdir          = $ntp::params::statsdir,
   $udlc              = $ntp::params::udlc,
   $udlc_stratum      = $ntp::params::udlc_stratum,
 ) inherits ntp::params {
@@ -43,6 +46,7 @@ class ntp (
   validate_re($keys_controlkey, ['^\d+$', ''])
   validate_re($keys_requestkey, ['^\d+$', ''])
   validate_array($keys_trusted)
+  validate_string($orphan_stratum)
   validate_string($package_ensure)
   validate_bool($package_manage)
   validate_array($package_name)
@@ -56,6 +60,8 @@ class ntp (
   validate_string($service_ensure)
   validate_bool($service_manage)
   validate_string($service_name)
+  validate_hash($statistics)
+  validate_string($statsdir)
   validate_bool($udlc)
   validate_array($peers)
 
